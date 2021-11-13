@@ -15,7 +15,7 @@ function execute {
     then
     echo ">>Dry run. Command: $*"
   else
-    eval $*
+    eval "$*"
   fi
 }
 
