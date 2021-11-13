@@ -85,45 +85,7 @@ if [[ $EUID -eq 0 ]]; then
    exit 1
 fi
 
-# calculate current VT
-LVT=`fgconsole`
-
-# calculate first usable display
-XNUM="-1"
-SOCK="something"
-while [[ ! -z "$SOCK" ]]
-do
-  XNUM=$(( $XNUM + 1 ))
-  SOCK=$(ls -A -1 /tmp/.X11-unix | grep "X$XNUM" )
-done
-
-NEWDISP=":$XNUM"
-
-if [[ ! -z "$*" ]] # generate exec line if arguments are given
-then
-  # test if executable exists in path
-  if [[ -x "$(which $1 2> /dev/null)" ]]
-  then
-    # generate exec line
-    EXECL="$(which $1)"
-  # test if executable exists on disk
-  elif [[ -e "$(realpath "$1")" ]]
-  then
-    # generate exec line
-    EXECL="$(realpath "$1")"
-  else
-    echo "$1: No such executable!"
-    exit 1
-  fi
-  shift 1
-  EXECL="$EXECL $*"
-else # prepare to start new X sessions if no arguments passed
-  EXECL=""
-fi
-
-EXECL="/etc/X11/xinit/nvidia-xinitrc \"$EXECL\""
-
-COMMAND="xinit $EXECL -- $NEWDISP vt$LVT -nolisten tcp -br -config nvidia-xorg.conf -configdir nvidia-xorg.conf.d"
+COMMAND="nvidia-startx"
 
 # --------- TURNING ON GPU -----------
 if [[ "$ENABLE_PM" == '1' ]]; then
