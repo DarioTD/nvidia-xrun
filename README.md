@@ -26,10 +26,10 @@ When the nvidia-xrun command is used, the device is added again to the tree so t
 ## Structure
 * **nvidia-xrun** - uses following dir structure:
 * **/usr/bin/nvidia-xrun** - the executable script
-* **/etc/X11/nvidia-xorg.conf** - the main X confing file
+* **/etc/X11/nvidia-xorg.conf.d/5-nvidia-gpu.conf** - the main X config file
+* **/etc/X11/nvidia-xorg.conf.d** - custom X config directory
 * **/etc/X11/xinit/nvidia-xinitrc** - xinitrc config file. Contains the setting of provider output source
 * **/etc/X11/xinit/nvidia-xinitrc.d** - custom xinitrc scripts directory
-* **/etc/X11/nvidia-xorg.conf.d** - custom X config directory
 * **/etc/systemd/system/nvidia-xrun-pm.service** systemd service
 * **/etc/default/nvidia-xrun** - nvidia-xrun config file
 * **/usr/share/xsessions/nvidia-xrun-openbox.desktop** - xsession file for openbox
